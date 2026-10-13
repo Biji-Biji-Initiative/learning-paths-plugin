@@ -164,7 +164,7 @@ class LearningPath(TimeStampedModel):
         if self.tracker.has_changed("image"):
             if old_image := self.tracker.previous("image"):
                 try:
-                    old_image.delete(save=False)
+                    old_image.storage.delete(old_image.name)
                 except Exception as e:  # pylint: disable=broad-except
                     log.exception("Failed to delete old image: %s", e)
 
